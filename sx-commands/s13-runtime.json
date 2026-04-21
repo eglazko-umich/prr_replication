@@ -1,0 +1,92 @@
+{
+    "target": "bmv2",
+    "p4info": "build/prr.p4.p4info.txtpb",
+    "bmv2_json": "build/prr.json",
+    "table_entries": [
+        {
+            "table": "MyIngress.ipv4_lpm",
+            "match": {
+                "hdr.ipv4.dstAddr": [
+                    "10.0.1.0",
+                    24
+                ]
+            },
+            "action_name": "MyIngress.set_prr_select",
+            "action_params": {
+                "ecmp_base": 1,
+                "ecmp_count": 4,
+                "switch_id": 13
+            }
+        },
+        {
+            "table": "MyIngress.ipv4_lpm",
+            "match": {
+                "hdr.ipv4.dstAddr": [
+                    "10.0.6.0",
+                    24
+                ]
+            },
+            "action_name": "MyIngress.set_prr_select",
+            "action_params": {
+                "ecmp_base": 5,
+                "ecmp_count": 1,
+                "switch_id": 13
+            }
+        },
+        {
+            "table": "MyIngress.prr_nhop",
+            "match": {
+                "meta.prr_hash": 1
+            },
+            "action_name": "MyIngress.set_nhop",
+            "action_params": {
+                "dstAddr": "08:00:00:13:06:00",
+                "port": 1
+            }
+        },
+        {
+            "table": "MyIngress.prr_nhop",
+            "match": {
+                "meta.prr_hash": 2
+            },
+            "action_name": "MyIngress.set_nhop",
+            "action_params": {
+                "dstAddr": "08:00:00:13:07:00",
+                "port": 2
+            }
+        },
+        {
+            "table": "MyIngress.prr_nhop",
+            "match": {
+                "meta.prr_hash": 3
+            },
+            "action_name": "MyIngress.set_nhop",
+            "action_params": {
+                "dstAddr": "08:00:00:13:08:00",
+                "port": 3
+            }
+        },
+        {
+            "table": "MyIngress.prr_nhop",
+            "match": {
+                "meta.prr_hash": 4
+            },
+            "action_name": "MyIngress.set_nhop",
+            "action_params": {
+                "dstAddr": "08:00:00:13:09:00",
+                "port": 4
+            }
+        },
+        {
+            "table": "MyIngress.prr_nhop",
+            "match": {
+                "meta.prr_hash": 5
+            },
+            "action_name": "MyIngress.set_nhop",
+            "action_params": {
+                "dstAddr": "08:00:00:13:14:00",
+                "port": 5
+            }
+        }
+    ]
+}
